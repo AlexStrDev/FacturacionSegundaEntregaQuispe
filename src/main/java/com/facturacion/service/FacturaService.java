@@ -1,11 +1,10 @@
 package com.facturacion.service;
 
-import com.facturacion.dao.FacturaDAO;
-import com.facturacion.dao.DetalleFacturaDAO;
 import com.facturacion.model.Cliente;
 import com.facturacion.model.DetalleFactura;
 import com.facturacion.model.Factura;
 import com.facturacion.model.Producto;
+import com.facturacion.repository.FacturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,33 +18,32 @@ public class FacturaService {
 
     private static final BigDecimal IGV_PORCENTAJE = new BigDecimal("0.18");
 
-    private final FacturaDAO facturaDAO;
-    private final DetalleFacturaDAO detalleFacturaDAO;
+    private final FacturaRepository facturaRepository;
     private final ClienteService clienteService;
     private final ProductoService productoService;
 
     @Autowired
-    public FacturaService(FacturaDAO facturaDAO, DetalleFacturaDAO detalleFacturaDAO,
-                          ClienteService clienteService, ProductoService productoService) {
-        this.facturaDAO = facturaDAO;
-        this.detalleFacturaDAO = detalleFacturaDAO;
+    public FacturaService(FacturaRepository facturaRepository,
+                          ClienteService clienteService,
+                          ProductoService productoService) {
+        this.facturaRepository = facturaRepository;
         this.clienteService = clienteService;
         this.productoService = productoService;
     }
 
     @Transactional(readOnly = true)
     public List<Factura> obtenerTodas() {
-        return facturaDAO.listarTodas();
+        return facturaRepository.findAllByOrderByFechaEmisionDescIdDesc();
     }
 
     @Transactional(readOnly = true)
     public Factura obtenerPorId(Long id) {
-        return facturaDAO.buscarPorId(id);
+        return facturaRepository.findById(id).orElse(null);
     }
 
     @Transactional(readOnly = true)
     public List<Factura> obtenerPorCliente(Long clienteId) {
-        return facturaDAO.listarPorCliente(clienteId);
+        return facturaRepository.findByClienteIdOrderByFechaEmisionDesc(clienteId);
     }
 
     @Transactional
@@ -90,12 +88,12 @@ public class FacturaService {
         factura.setIgv(igv);
         factura.setTotal(total);
 
-        return facturaDAO.guardar(factura);
+        return facturaRepository.save(factura);
     }
 
     @Transactional(readOnly = true)
     public String generarNumeroFactura() {
-        Long count = facturaDAO.contarFacturas() + 1;
+        Long count = facturaRepository.count() + 1;
         return String.format("F001-%08d", count);
     }
 
