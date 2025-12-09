@@ -1,7 +1,9 @@
 package com.facturacion.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +16,7 @@ public class DetalleFactura {
 
     @ManyToOne
     @JoinColumn(name = "factura_id", nullable = false)
+    @JsonIgnore
     private Factura factura;
 
     @ManyToOne
@@ -29,7 +32,11 @@ public class DetalleFactura {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal;
 
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion;
+
     public DetalleFactura() {
+        this.fechaCreacion = LocalDateTime.now();
     }
 
     public DetalleFactura(Factura factura, Producto producto, Integer cantidad, BigDecimal precioUnitario) {
@@ -38,6 +45,7 @@ public class DetalleFactura {
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         this.subtotal = precioUnitario.multiply(BigDecimal.valueOf(cantidad));
+        this.fechaCreacion = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -88,6 +96,14 @@ public class DetalleFactura {
         this.subtotal = subtotal;
     }
 
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
     @Override
     public String toString() {
         return "DetalleFactura{" +
@@ -96,6 +112,7 @@ public class DetalleFactura {
                 ", cantidad=" + cantidad +
                 ", precioUnitario=" + precioUnitario +
                 ", subtotal=" + subtotal +
+                ", fechaCreacion=" + fechaCreacion +
                 '}';
     }
 

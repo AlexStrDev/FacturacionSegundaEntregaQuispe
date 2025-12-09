@@ -1,0 +1,415 @@
+{
+  "info": {
+    "name": "Sistema de Facturación API",
+    "description": "Colección de Postman para probar todos los endpoints del sistema de facturación",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Listar todos los clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            }
+          }
+        },
+        {
+          "name": "Listar clientes activos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/activos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "activos"]
+            }
+          }
+        },
+        {
+          "name": "Obtener cliente por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "1"]
+            }
+          }
+        },
+        {
+          "name": "Obtener cliente por RUC",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/ruc/20123456789",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "ruc", "20123456789"]
+            }
+          }
+        },
+        {
+          "name": "Crear cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ruc\": \"20111222333\",\n  \"razonSocial\": \"Empresa Ejemplo SAC\",\n  \"direccion\": \"Av. Ejemplo 123, Lima\",\n  \"telefono\": \"987654321\",\n  \"email\": \"contacto@ejemplo.com\",\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar cliente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ruc\": \"20123456789\",\n  \"razonSocial\": \"Empresa Demo SAC - Actualizada\",\n  \"direccion\": \"Av. Principal 456, Lima\",\n  \"telefono\": \"987654321\",\n  \"email\": \"ventas@demo.com\",\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "1"]
+            }
+          }
+        },
+        {
+          "name": "Desactivar cliente",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/1/desactivar",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "1", "desactivar"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar cliente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Productos",
+      "item": [
+        {
+          "name": "Listar todos los productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/productos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos"]
+            }
+          }
+        },
+        {
+          "name": "Listar productos activos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/productos/activos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "activos"]
+            }
+          }
+        },
+        {
+          "name": "Listar productos con stock",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/productos/stock",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "stock"]
+            }
+          }
+        },
+        {
+          "name": "Obtener producto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/productos/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Obtener producto por código",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/productos/codigo/PROD001",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "codigo", "PROD001"]
+            }
+          }
+        },
+        {
+          "name": "Crear producto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"PROD007\",\n  \"nombre\": \"Impresora Multifuncional\",\n  \"precioUnitario\": 350.00,\n  \"stock\": 20,\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/productos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar producto",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"codigo\": \"PROD001\",\n  \"nombre\": \"Laptop HP - Nueva Generación\",\n  \"precioUnitario\": 2800.00,\n  \"stock\": 15,\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/productos/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar stock (incrementar)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/productos/1/stock?cantidad=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "1", "stock"],
+              "query": [
+                {
+                  "key": "cantidad",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar stock (reducir)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/productos/1/stock?cantidad=-5",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "1", "stock"],
+              "query": [
+                {
+                  "key": "cantidad",
+                  "value": "-5"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar producto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/productos/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Facturas/Comprobantes",
+      "item": [
+        {
+          "name": "Listar todas las facturas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/facturas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "facturas"]
+            }
+          }
+        },
+        {
+          "name": "Obtener factura por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/facturas/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "facturas", "1"]
+            }
+          }
+        },
+        {
+          "name": "Obtener facturas por cliente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/facturas/cliente/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "facturas", "cliente", "1"]
+            }
+          }
+        },
+        {
+          "name": "Crear comprobante exitoso",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"clienteid\": 1\n  },\n  \"lineas\": [\n    {\n      \"cantidad\": 2,\n      \"producto\": {\n        \"productoid\": 1\n      }\n    },\n    {\n      \"cantidad\": 5,\n      \"producto\": {\n        \"productoid\": 2\n      }\n    },\n    {\n      \"cantidad\": 1,\n      \"producto\": {\n        \"productoid\": 3\n      }\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/facturas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "facturas"]
+            }
+          }
+        },
+        {
+          "name": "Crear comprobante - Cliente no existe",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"clienteid\": 999\n  },\n  \"lineas\": [\n    {\n      \"cantidad\": 1,\n      \"producto\": {\n        \"productoid\": 1\n      }\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/facturas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "facturas"]
+            }
+          }
+        },
+        {
+          "name": "Crear comprobante - Stock insuficiente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"clienteid\": 1\n  },\n  \"lineas\": [\n    {\n      \"cantidad\": 1000,\n      \"producto\": {\n        \"productoid\": 1\n      }\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/facturas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "facturas"]
+            }
+          }
+        },
+        {
+          "name": "Crear comprobante - Producto no existe",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente\": {\n    \"clienteid\": 1\n  },\n  \"lineas\": [\n    {\n      \"cantidad\": 1,\n      \"producto\": {\n        \"productoid\": 999\n      }\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/facturas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "facturas"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}

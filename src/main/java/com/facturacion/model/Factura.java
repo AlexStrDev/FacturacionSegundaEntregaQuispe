@@ -3,6 +3,7 @@ package com.facturacion.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +26,9 @@ public class Factura {
     @Column(name = "fecha_emision", nullable = false)
     private LocalDate fechaEmision;
 
+    @Column(name = "fecha_hora_emision")
+    private LocalDateTime fechaHoraEmision;
+
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal;
 
@@ -33,6 +37,9 @@ public class Factura {
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
+
+    @Column(name = "cantidad_total_productos")
+    private Integer cantidadTotalProductos;
 
     @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<DetalleFactura> detalles = new ArrayList<>();
@@ -78,6 +85,14 @@ public class Factura {
         this.fechaEmision = fechaEmision;
     }
 
+    public LocalDateTime getFechaHoraEmision() {
+        return fechaHoraEmision;
+    }
+
+    public void setFechaHoraEmision(LocalDateTime fechaHoraEmision) {
+        this.fechaHoraEmision = fechaHoraEmision;
+    }
+
     public BigDecimal getSubtotal() {
         return subtotal;
     }
@@ -102,6 +117,14 @@ public class Factura {
         this.total = total;
     }
 
+    public Integer getCantidadTotalProductos() {
+        return cantidadTotalProductos;
+    }
+
+    public void setCantidadTotalProductos(Integer cantidadTotalProductos) {
+        this.cantidadTotalProductos = cantidadTotalProductos;
+    }
+
     public List<DetalleFactura> getDetalles() {
         return detalles;
     }
@@ -117,9 +140,11 @@ public class Factura {
                 ", numeroFactura='" + numeroFactura + '\'' +
                 ", cliente=" + (cliente != null ? cliente.getRazonSocial() : "null") +
                 ", fechaEmision=" + fechaEmision +
+                ", fechaHoraEmision=" + fechaHoraEmision +
                 ", subtotal=" + subtotal +
                 ", igv=" + igv +
                 ", total=" + total +
+                ", cantidadTotalProductos=" + cantidadTotalProductos +
                 '}';
     }
 
