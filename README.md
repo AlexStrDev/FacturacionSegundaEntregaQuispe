@@ -20,8 +20,7 @@ Incluye archivo `Sistema-Facturacion.postman_collection.json` con todos los endp
 Archivo `schema.sql` con la estructura completa de tablas, índices y datos iniciales.
 
 ### 🔗 Repositorio GitHub
-**URL del proyecto:** `https://GitHub.com/[tu-usuario]/sistema-facturacion`
-> ⚠️ **Nota:** Reemplazar con la URL real de tu repositorio GitHub
+**URL del proyecto:** `https://github.com/AlexStrDev/FacturacionEntregaProyectoFinalQuispe`
 
 ## Inicio Rápido
 
@@ -219,9 +218,3 @@ java -version
 # Limpiar y recompilar
 mvn clean package -DskipTests
 ```
-
-## Contacto
-
-Equipo de Desarrollo - contacto@facturacion.com
-
-**Repositorio GitHub:** https://github.com/[tu-usuario]/sistema-facturacion
